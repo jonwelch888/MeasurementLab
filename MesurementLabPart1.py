@@ -3,6 +3,7 @@
 # Author: Jon Welch 
 # PHYS-2425: Engineering Physics 1 
 # Purpose: Mesurement Lab part 1
+# Note: Data is related to a Tabletop
 # Date: [8-29-24] 
 ############
 
