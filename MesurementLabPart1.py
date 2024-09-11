@@ -1,10 +1,12 @@
 
+
 ############
 # Author: Jon Welch 
 # PHYS-2425: Engineering Physics 1 
 # Purpose: Mesurement Lab part 1
 # Note: Data is related to a Tabletop
-# Date: [8-29-24] 
+# Date: [8-29-24]
+# Ready for submission?[yes]
 ############
 
 import numpy as np
@@ -59,7 +61,8 @@ mean_values = [mean_length, mean_width, mean_thickness]
 stderr_values = [stderr_length, stderr_width, stderr_thickness]
 
 # Plotting with error bars
-ax.errorbar(measurements, mean_values, yerr=stderr_values, fmt='o', capsize=5, label='Mean Values with Uncertainty')
+# Was ~> [ capsize=5, ]; fmt='o',
+ax.errorbar(measurements, mean_values, yerr=stderr_values, fmt='s', capsize=20, label='Mean Values with Uncertainty')
 
 # Adding labels and title
 plt.xlabel('Measurements')
@@ -70,15 +73,16 @@ plt.legend()
 
 # Creating a table with calculated values including standard deviations
 table_data = [
-    ['Length', f'{mean_length:.2f}', f'{std_length:.4f}', f'{stderr_length:.4f}'],
-    ['Width', f'{mean_width:.2f}', f'{std_width:.4f}', f'{stderr_width:.4f}'],
-    ['Thickness', f'{mean_thickness:.2f}', f'{std_thickness:.4f}', f'{stderr_thickness:.4f}'],
-    ['Surface Area', f'{surface_area:.2f}', '-', f'{delta_surface_area:.2f}'],
-    ['Volume', f'{volume:.2f}', '-', f'{delta_volume:.2f}']
+    ['Length', f'{mean_length:.5f}', f'{std_length:.5f}', f'{stderr_length:.5f}'],
+    ['Width', f'{mean_width:.5f}', f'{std_width:.5f}', f'{stderr_width:.5f}'],
+    ['Thickness', f'{mean_thickness:.5f}', f'{std_thickness:.5f}', f'{stderr_thickness:.5f}'],
+    ['Surface Area', f'{surface_area:.5f}', '-', f'{delta_surface_area:.5f}'],
+    ['Volume', f'{volume:.5f}', '-', f'{delta_volume:.5f}']
 ]
 
+
 # Add the table to the plot
-#[0, -0.8, 1, 0.6]
+#Was ~>[0, -0.8, 1, 0.6]
 table = plt.table(cellText=table_data, colLabels=['Measurement', 'Mean Value (cm or cm$^2$/cm$^3$)', 'Standard Deviation (cm)', 'Uncertainty (cm)'], loc='bottom', cellLoc='center', bbox=[0, -0.4, 1, 0.3])
 table.auto_set_font_size(False)
 table.set_fontsize(10)
@@ -88,15 +92,18 @@ plt.subplots_adjust(left=0.2, bottom=0.4)
 
 # Adding a text box with summary data
 summary_text = (
-    f"Mean Length: {mean_length:.2f} cm, Standard Error: {stderr_length:.4f} cm\n"
-    f"Mean Width: {mean_width:.2f} cm, Standard Error: {stderr_width:.4f} cm\n"
-    f"Mean Thickness: {mean_thickness:.2f} cm, Standard Error: {stderr_thickness:.4f} cm\n"
-    f"Surface Area: {surface_area:.2f} cm², Uncertainty in Surface Area: {delta_surface_area:.2f} cm²\n"
-    f"Volume: {volume:.2f} cm³, Uncertainty in Volume: {delta_volume:.2f} cm³"
+    f"Mean Length: ({mean_length:.2f}±{stderr_length:.2f}) cm\n"
+    f"Mean Width: ({mean_width:.2f}±{stderr_width:.2f}) cm\n"
+    f"Mean Thickness: ({mean_thickness:.2f}±{stderr_thickness:.2f}) cm\n"
+    f"Surface Area: ({surface_area:.2f}±{delta_surface_area:.2f}) cm²\n"
+    f"Volume: ({volume:.2f}±{delta_volume:.2f}) cm³"
 )
+
 #best, [0.7, 0.05,]; 
 # Display the summary text at the bottom
 plt.figtext(0.7, 0.05, summary_text, wrap=True, horizontalalignment='center', fontsize=10)
 
-# Show the plot
+
+#Showthe plot
 plt.show()
+
