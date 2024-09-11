@@ -3,7 +3,8 @@
 # PHYS-2425: Engineering Physics 1 
 # Purpose: Mesurement Lab part 2
 # Note: Data is related to a cylinder
-# Date: [8-29-24] 
+# Date: [8-29-24]
+# Ready for submission?[yes]
 ##################
 
 import numpy as np
@@ -40,10 +41,6 @@ b = mean_circumference - (m * mean_diameter)
 # Step 1: take partial derivatives and set to zero
 # Partial derivatives for S = sum((y_i - (m*x_i + b))^2)
 
-###[not working]###
-#partial_derivative_m = -2 * np.sum(diameter * (circumference - (mean_circumference + mean_diameter * (diameter - mean_diameter) )))
-#partial_derivative_b = -2 * np.sum(circumference - (mean_circumference + mean_diameter * (diameter - mean_diameter) ))
-###
 partial_derivative_m = -2 * np.sum(diameter * (circumference - (m * diameter + b)))
 partial_derivative_b = -2 * np.sum(circumference - (m * diameter + b))
 
@@ -54,9 +51,6 @@ residuals = circumference - ((m * diameter) + b)
 Se = np.sqrt(np.sum(residuals ** 2) / (N - 2))
 
 # Step 4: Calculate uncertainties in slope [m] and intercept [b]
-###[not working]###
-#b_uncertainty = m_uncertainty * np.sqrt(np.sum(diameter** 2) / N)
-###
 m_uncertainty = Se / np.sqrt(np.sum( (diameter - mean_diameter)** 2) )
 b_uncertainty = Se * np.sqrt( (1 / N) + (mean_diameter ** 2 / np.sum((diameter - mean_diameter) ** 2)) )
 
@@ -98,14 +92,21 @@ plt.legend()
 
 # Creating a table with the calculated values
 table_data = [
-    ['Partial Derivative wrt m', f'{partial_derivative_m:.5f}'],
-    ['Partial Derivative wrt b', f'{partial_derivative_b:.5f}'],
-    ['Second Derivative wrt m', f'{second_derivative_m:.5f} ({minima_check_m})'],
-    ['Second Derivative wrt b', f'{second_derivative_b:.5f} ({minima_check_b})'],
+    ['Circumference (cm)', ', '.join([f'{val:.2f}' for val in circumference]), 'Uncertainty (cm)', ', '.join([f'{val:.2f}' for val in uncertainty_circumference])],
+    ['Diameter (cm)', ', '.join([f'{val:.2f}' for val in diameter]), 'Uncertainty (cm)', ', '.join([f'{val:.2f}' for val in uncertainty_diameter])],
+    ['Partial Derivative wrt m', f'{partial_derivative_m:.5f}', 'Partial Derivative wrt b', f'{partial_derivative_b:.5f}'],
+    ['Second Derivative wrt m', f'{second_derivative_m:.5f} ({minima_check_m})', 'Second Derivative wrt b', f'{second_derivative_b:.5f} ({minima_check_b})'],
+    ['Slope (m)', f'{m:.5f} cm/cm', 'Intercept (b)', f'{b:.5f} cm'],
+    ['Uncertainty in Slope (m)', f'{m_uncertainty:.5f} cm/cm', 'Uncertainty in Intercept (b)', f'{b_uncertainty:.5f} cm'],
+    ['Percent Error', f'{percent_error:.2f}%', 'is pi within the uncertainty:[yes]  ', '']
 ]
 
+
 # Add the table  # best; bbox=[0, -0.8, 1, 0.6]
-table = plt.table(cellText=table_data, colLabels=['Description', 'Value'], loc='bottom', cellLoc='center', bbox=[0, -0.8, 1, 0.6])
+
+
+table = plt.table(cellText=table_data, colLabels=['Description 1', 'Value 1', 'Description 2', 'Value 2'], loc='bottom', cellLoc='center', bbox=[0, -0.8, 1, 0.6])
+
 table.auto_set_font_size(False)
 table.set_fontsize(10)
 
@@ -120,7 +121,7 @@ summary_text = (
     f"Uncertainty in b: {b_uncertainty:.5f} cm\n"
     f"Percent Error: {percent_error:.2f}%"
 )
-#[For data box] was[0.05, 0.05,]; Alpha was [0.7];
+#[For data box] was~>[0.05, 0.05,]; Alpha was [0.7];
 plt.text(0.7, 0.05, summary_text, transform=plt.gca().transAxes, fontsize=10,
          verticalalignment='bottom', bbox=dict(facecolor='white', alpha=0.9))
 
