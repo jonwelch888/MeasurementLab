@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 # Data: circumference and diameter of the five cylinders [in cm and mm]
 circumference = np.array([3.1, 7.1, 10.9, 26.1, 43.2])  # in cm
-diameter = np.array([9.7, 21.2, 75.8, 82.3, 148.2])     # in mm
+diameter = np.array([9.7, 21.2, 35.8, 82.3, 148.2])     # in mm
 
 # Convert diameters to cm for CONSISTENCY [must convert]
 diameter = diameter / 10  # Convert from mm to cm
