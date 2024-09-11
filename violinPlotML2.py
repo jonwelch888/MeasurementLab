@@ -52,11 +52,13 @@ because it's visually stacking multiple overlapping lines.
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 # Data: Measurements of the length, width, and thickness of the tabletop (in cm)
 length_measurements = np.array([152.2, 152.2, 152.0, 152.4, 152.0])  
-width_measurements = np.array([60.5, 60.5, 60.5, 60.7, 60.5])         
-thickness_measurements = np.array([3.2, 3.3, 3.2, 3.3, 3.3])          
+width_measurements = np.array([60.5, 60.8, 60.5, 60.7, 60.5])         
+thickness_measurements = np.array([3.2, 3.3, 3.2, 3.3, 3.3])  
 
+    
 # Step 1: Calculate the mean values
 mean_length = np.mean(length_measurements)
 mean_width = np.mean(width_measurements)
